@@ -10,7 +10,8 @@ To add the service to your stack, add the following snippet to docker-compose.ym
 services:
   harvesting-import:
     image: lblod/harvesting-import-service:x.x.x
-
+    volumes:
+      - ./data/files:/share
 ```
 
 ## Configuration
