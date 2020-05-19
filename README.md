@@ -16,7 +16,31 @@ services:
 
 ## Configuration
 
-TODO configuration
+### Delta
+
+```
+  {
+    match: {
+      predicate: {
+        type: 'uri',
+        value: 'http://www.w3.org/ns/adms#status'
+      },
+      object: {
+        type: 'uri',
+        value: 'http://lblod.data.gift/harvesting-statuses/ready-for-importing'
+      }
+    },
+    callback: {
+      url: 'http://harvesting-import/delta',
+      method: 'POST'
+    },
+    options: {
+      resourceFormat: 'v0.0.1',
+      gracePeriod: 1000,
+      ignoreFromSelf: true
+    }
+  }
+```
    
 ## REST API
 
