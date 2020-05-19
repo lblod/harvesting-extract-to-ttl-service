@@ -52,13 +52,22 @@ app.post('/delta', async function (req, res, next) {
 });
 
 
-// TODO doc
+/**
+ * Returns the inserted ready-for-import harvesting task URIs
+ * from the delta message. An empty array if there are none.
+ *
+ * @param delta body as received from the delta notifier
+ */
 function getTasks(delta) {
   const inserts = flatten(delta.map(changeSet => changeSet.inserts));
   return inserts.filter(isTriggerTriple).map(t => t.subject.value);
 }
 
-// TODO doc
+/**
+ * Returns whether the passed triple is a trigger for an import process
+ *
+ * @param triple as received from the delta notifier
+ */
 function isTriggerTriple(triple) {
   return triple.predicate.value === 'http://www.w3.org/ns/adms#status'
     && triple.object.value === TASK_READY;
