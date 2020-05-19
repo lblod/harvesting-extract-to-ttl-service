@@ -83,6 +83,10 @@ harvestingCollection |`prov:generated`|`harvesting:HarvestingCollection`| Harves
 The status of the task will be updated by other micro-services to reflect the progress of the harvesting progress. The following statuses are known:
 
 - http://lblod.data.gift/harvesting-statuses/ready-for-collecting
+- http://lblod.data.gift/harvesting-statuses/ready-for-importing
+- http://lblod.data.gift/harvesting-statuses/importing
+- http://lblod.data.gift/harvesting-statuses/success
+- http://lblod.data.gift/harvesting-statuses/failure
 
 ## HarvestingCollection
 
