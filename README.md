@@ -50,8 +50,11 @@ services:
 starts the import of the given harvesting-tasks into the db
 
 Returns 204 NO-CONTENT if no harvesting-tasks could be extracted.
+
 Returns 200 SUCCESS if the harvesting-tasks where successfully processes.
+
 Returns 400 BAD-REQUEST if something went wrong while processing the harvesting-tasks.
+
 
 ## Model
 
