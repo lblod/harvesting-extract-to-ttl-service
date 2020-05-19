@@ -43,9 +43,9 @@ app.post('/delta', async function (req, res, next) {
       } catch (e) {
         console.log(`Failed to update state of task <${task}> to failure state. Is the connection to the database broken?`);
         console.error(e);
-        return res.status(500).send();
+        return res.status(400).send();
       }
-      return res.status(500).send();
+      return res.status(400).send();
     }
   }
   return res.status(200).send();
