@@ -1,6 +1,7 @@
 # harvesting-import-service
 
-TODO description
+Microservice that harvests knowledge about a harvesting-task from the linked annotated documents 
+and writes the resulting triples to the database.
 
 ## Installation
 
@@ -44,7 +45,13 @@ services:
    
 ## REST API
 
-TODO API Documentation
+### POST /delta
+
+starts the import of the given harvesting-tasks into the db
+
+Returns 204 NO-CONTENT if no harvesting-tasks could be extracted.
+Returns 200 SUCCESS if the harvesting-tasks where successfully processes.
+Returns 400 BAD-REQUEST if something went wrong while processing the harvesting-tasks.
 
 ## Model
 
