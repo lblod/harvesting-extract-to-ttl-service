@@ -1,16 +1,21 @@
 import {app, errorHandler} from 'mu';
 
 import flatten from 'lodash.flatten';
+import bodyParser from 'body-parser';
+
 import {importHarvestingTask} from "./lib/harvesting-task";
 
 const TASK_READY = 'http://lblod.data.gift/harvesting-statuses/ready-for-importing';
+
+app.use(bodyParser.json({ type: function(req) { return /^application\/json/.test(req.get('content-type')); } }));
+
 app.get('/', function (req, res) {
   res.send('Hello harvesting-import-service');
 });
 
-app.post('/delta', async function (req, res) {
+app.post('/delta', async function (req, res, next) {
 
-  const tasks = getTasks(req.delta);
+  const tasks = getTasks(req.body);
   if (!tasks.length) {
     console.log("Delta does not contain new harvesting tasks  with status 'ready-for-importing'. Nothing should happen.");
     return res.status(204).send();
