@@ -5,10 +5,8 @@ import bodyParser from 'body-parser';
 
 import {
   importHarvestingTask,
-  TASK_FAILURE,
   TASK_ONGOING,
   TASK_READY,
-  TASK_SUCCESS,
   updateTaskStatus
 } from "./lib/harvesting-task";
 
@@ -29,29 +27,22 @@ app.post('/delta', async function (req, res, next) {
     console.log("Delta does not contain new harvesting tasks  with status 'ready-for-importing'. Nothing should happen.");
     return res.status(204).send();
   }
+  try {
+    console.log(`Successfully started import for harvesting tasks ${tasks.join(`, `)}`);
+    for (let task of tasks) {
 
-  for (let task of tasks) {
-    try {
       await updateTaskStatus(task, TASK_ONGOING);
-      await importHarvestingTask(task);
-      await updateTaskStatus(task, TASK_SUCCESS);
-    } catch (e) {
-      console.log(`Something went wrong while importing the harvesting task <${task}>`);
-      console.error(e);
-      try {
-        await updateTaskStatus(task, TASK_FAILURE);
-      } catch (e) {
-        console.log(`Failed to update state of task <${task}> to failure state. Is the connection to the database broken?`);
-        console.error(e);
-        return res.status(400).send().end();
-      }
-      return res.status(400).send().end();
+      importHarvestingTask(task); // async processing of import
     }
+    return res.status(200).send().end();
+  } catch (e) {
+    console.log(`Something went wrong while handling deltas for harvesting tasks ${tasks.join(`, `)}`);
+    console.log(e);
+    return next(e);
   }
-  return res.status(200).send().end();
 });
 
-
+// async function importHarvestingTask
 /**
  * Returns the inserted ready-for-import harvesting task URIs
  * from the delta message. An empty array if there are none.
