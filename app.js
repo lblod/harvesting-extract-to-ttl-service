@@ -27,7 +27,7 @@ app.post('/delta', async function (req, res, next) {
   const tasks = getTasks(req.body);
   if (!tasks.length) {
     console.log("Delta does not contain new harvesting tasks  with status 'ready-for-importing'. Nothing should happen.");
-    res.status(204).send();
+    return res.status(204).send();
   }
 
   for (let task of tasks) {
@@ -43,12 +43,12 @@ app.post('/delta', async function (req, res, next) {
       } catch (e) {
         console.log(`Failed to update state of task <${task}> to failure state. Is the connection to the database broken?`);
         console.error(e);
-        res.status(400).send().end();
+        return res.status(400).send().end();
       }
-      res.status(400).send().end();
+      return res.status(400).send().end();
     }
   }
-  res.status(200).send().end();
+  return res.status(200).send().end();
 });
 
 
