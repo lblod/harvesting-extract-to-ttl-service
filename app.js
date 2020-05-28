@@ -32,7 +32,7 @@ app.post('/delta', async function (req, res, next) {
     for (let task of tasks) {
 
       await updateTaskStatus(task, TASK_ONGOING);
-      importHarvestingTask(task); // async processing of import
+      await importHarvestingTask(task); // async processing of import
     }
     return res.status(200).send().end();
   } catch (e) {
