@@ -42,18 +42,22 @@ services:
     }
   }
 ```
-   
+### Environment variables
+
+ - TARGET_GRAPH: refers to the graph where the harvested triples will be imported into. 
+ Defaults to <http://mu.semte.ch/graphs/public>.
+      
 ## REST API
 
 ### POST /delta
 
-starts the import of the given harvesting-tasks into the db
+Starts the import of the given harvesting-tasks into the db
 
-Returns 204 NO-CONTENT if no harvesting-tasks could be extracted.
+- Returns `204 NO-CONTENT` if no harvesting-tasks could be extracted.
 
-Returns 200 SUCCESS if the harvesting-tasks where successfully processes.
+- Returns `200 SUCCESS` if the harvesting-tasks where successfully processes.
 
-Returns 500 INTERNAL SERVER ERROR if something unexpected went wrong while processing the harvesting-tasks.
+- Returns `500 INTERNAL SERVER ERROR` if something unexpected went wrong while processing the harvesting-tasks.
 
 
 ## Model
