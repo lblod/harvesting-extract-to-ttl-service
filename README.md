@@ -53,7 +53,7 @@ Returns 204 NO-CONTENT if no harvesting-tasks could be extracted.
 
 Returns 200 SUCCESS if the harvesting-tasks where successfully processes.
 
-Returns 400 BAD-REQUEST if something went wrong while processing the harvesting-tasks.
+Returns 500 INTERNAL SERVER ERROR if something unexpected went wrong while processing the harvesting-tasks.
 
 
 ## Model
