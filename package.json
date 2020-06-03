@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "@lblod/mu-auth-sudo": "^0.2.0",
-    "@lblod/marawa": "^0.7.0",
+    "@lblod/marawa": "^0.7.1",
     "body-parser": "1.19.0",
     "fs-extra": "8.1.0",
     "jsdom": "^11.6.2",
