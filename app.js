@@ -1,14 +1,15 @@
 import {app, errorHandler} from 'mu';
 
-import flatten from 'lodash.flatten';
 import bodyParser from 'body-parser';
 
 import {
   importHarvestingTask,
+  TASK_FAILURE,
   TASK_ONGOING,
-  TASK_READY,
+  TASK_READY, TASK_SUCCESS,
   updateTaskStatus
 } from "./lib/harvesting-task";
+import {Delta} from "./lib/delta";
 
 app.use(bodyParser.json({
   type: function (req) {
@@ -21,47 +22,35 @@ app.get('/', function (req, res) {
 });
 
 app.post('/delta', async function (req, res, next) {
-
-  const tasks = getTasks(req.body);
-  if (!tasks.length) {
-    console.log("Delta does not contain new harvesting tasks  with status 'ready-for-importing'. Nothing should happen.");
-    return res.status(204).send();
-  }
   try {
-    console.log(`Successfully started import for harvesting tasks ${tasks.join(`, `)}`);
+    const tasks = new Delta(req.body).getInsertsFor('http://www.w3.org/ns/adms#status', TASK_READY);
+    if (!tasks.length) {
+      console.log('Delta dit not contain harvesting-tasks that are ready for import, awaiting the next batch!');
+      return res.status(204).send();
+    }
+    console.log(`Starting import for harvesting-tasks: ${tasks.join(`, `)}`);
     for (let task of tasks) {
-
-      await updateTaskStatus(task, TASK_ONGOING);
-      await importHarvestingTask(task); // async processing of import
+      try {
+        await updateTaskStatus(task, TASK_ONGOING);
+        await importHarvestingTask(task);
+        await updateTaskStatus(task, TASK_SUCCESS);
+      }catch (e){
+        console.log(`Something unexpected went wrong while handling delta harvesting-task <${task}>`);
+        console.error(e);
+        try {
+          await updateTaskStatus(task, TASK_FAILURE);
+        } catch (e) {
+          console.log(`Failed to update state of task <${task}> to failure state. Is the connection to the database broken?`);
+          console.error(e);
+        }
+      }
     }
     return res.status(200).send().end();
   } catch (e) {
-    console.log(`Something went wrong while handling deltas for harvesting tasks ${tasks.join(`, `)}`);
-    console.log(e);
+    console.log(`Something unexpected went wrong while handling delta harvesting-tasks!`);
+    console.error(e);
     return next(e);
   }
 });
-
-// async function importHarvestingTask
-/**
- * Returns the inserted ready-for-import harvesting task URIs
- * from the delta message. An empty array if there are none.
- *
- * @param delta body as received from the delta notifier
- */
-function getTasks(delta) {
-  const inserts = flatten(delta.map(changeSet => changeSet.inserts));
-  return inserts.filter(isTriggerTriple).map(t => t.subject.value);
-}
-
-/**
- * Returns whether the passed triple is a trigger for an import process
- *
- * @param triple as received from the delta notifier
- */
-function isTriggerTriple(triple) {
-  return triple.predicate.value === 'http://www.w3.org/ns/adms#status'
-    && triple.object.value === TASK_READY;
-}
 
 app.use(errorHandler);
