@@ -9,14 +9,15 @@
   "author": "redpencil.io",
   "license": "MIT",
   "dependencies": {
-    "@lblod/mu-auth-sudo": "^0.2.0",
     "@lblod/marawa": "^0.7.1",
+    "@lblod/mu-auth-sudo": "^0.2.0",
     "body-parser": "1.19.0",
     "fs-extra": "8.1.0",
     "jsdom": "^11.6.2",
     "lodash.flatten": "^4.4.0",
+    "lodash.uniq": "^4.5.0",
     "lodash.uniqwith": "^4.5.0",
-    "lodash.uniq": "^4.5.0"
+    "n3": "^1.6.2"
   },
   "devDependencies": {},
   "scripts": {
