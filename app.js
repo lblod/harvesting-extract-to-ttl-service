@@ -6,7 +6,7 @@ import {
   importHarvestingTask,
   TASK_FAILURE,
   TASK_ONGOING,
-  TASK_READY, TASK_SUCCESS,
+  TASK_READY, TASK_READY_FOR_SAMEAS,
   updateTaskStatus
 } from "./lib/harvesting-task";
 import {Delta} from "./lib/delta";
@@ -33,7 +33,7 @@ app.post('/delta', async function (req, res, next) {
       try {
         await updateTaskStatus(task, TASK_ONGOING);
         await importHarvestingTask(task);
-        await updateTaskStatus(task, TASK_SUCCESS);
+        await updateTaskStatus(task, TASK_READY_FOR_SAMEAS);
       }catch (e){
         console.log(`Something unexpected went wrong while handling delta harvesting-task <${task}>`);
         console.error(e);
