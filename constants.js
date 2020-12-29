@@ -1,5 +1,4 @@
 export const TASK_HARVESTING_IMPORTING = 'http://lblod.data.gift/id/jobs/concept/TaskOperation/importing';
-export const TASK_HARVESTING_REPARING = 'http://lblod.data.gift/id/jobs/concept/TaskOperation/reparing';
 
 export const STATUS_BUSY = 'http://redpencil.data.gift/id/concept/JobStatus/busy';
 export const STATUS_SCHEDULED = 'http://redpencil.data.gift/id/concept/JobStatus/scheduled';
