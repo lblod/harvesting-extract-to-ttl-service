@@ -23,7 +23,8 @@ app.post('/delta', async function (req, res, next) {
       return res.status(204).send();
     }
     for (let entry of entries) {
-      await runImportPipeline(entry);
+      // NOTE: we don't wait as we do not want to keep hold off the connection.
+      runImportPipeline(entry);
     }
     return res.status(200).send().end();
   } catch (e) {
