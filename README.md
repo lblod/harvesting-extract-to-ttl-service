@@ -46,6 +46,21 @@ services:
 
  - TARGET_GRAPH: refers to the graph where the harvested triples will be imported into. 
  Defaults to <http://mu.semte.ch/graphs/public>.
+
+## Validation and correction
+The service will validate the triples to import and will try its best to correct the ones that it founds invalid. In case they can't be fixed the service will create a new predicate that links to the old predicate with `<http://centrale-vindplaats.lblod.info/ns/predicates/unparsedFormOf>` , apply that predicate to the triple and insert the object without a datatype.
+Example:
+
+Input
+```
+<https://bertem.meetingburger.net/gr/6c8a0a3c-c9b6-4d47-82d0-8643ea501cb2/notulen> <http://www.w3.org/ns/prov#startedAtTime> "2020-05-26T18:13:00+2"^^<http://www.w3.org/2001/XMLSchema#dateTime>.
+```
+
+Output
+```
+<http://centrale-vindplaats.lblod.info/ns/predicates/e3230ef0-ee88-11ea-8b2a-6179a3bcc5f8> <http://centrale-vindplaats.lblod.info/ns/predicates/unparsedFormOf> <http://www.w3.org/ns/prov#startedAtTime>.
+<https://bertem.meetingburger.net/gr/6c8a0a3c-c9b6-4d47-82d0-8643ea501cb2/notulen> <http://centrale-vindplaats.lblod.info/ns/predicates/e3230ef0-ee88-11ea-8b2a-6179a3bcc5f8> "2020-05-26T18:13:00+2".
+```
       
 ## REST API
 

@@ -1,6 +1,6 @@
 {
   "name": "harvesting-import-service",
-  "version": "0.2.6",
+  "version": "0.5.0-beta.4",
   "description": "Microservice that harvests knowledge about a harvesting-task from the linked annotated documents and writes the resulting triples to the database.",
   "repository": {
     "type": "git",
@@ -9,14 +9,15 @@
   "author": "redpencil.io",
   "license": "MIT",
   "dependencies": {
+    "@lblod/marawa": "^0.8.0-beta.3",
     "@lblod/mu-auth-sudo": "^0.2.0",
-    "@lblod/marawa": "^0.7.1",
     "body-parser": "1.19.0",
     "fs-extra": "8.1.0",
     "jsdom": "^11.6.2",
     "lodash.flatten": "^4.4.0",
+    "lodash.uniq": "^4.5.0",
     "lodash.uniqwith": "^4.5.0",
-    "lodash.uniq": "^4.5.0"
+    "n3": "^1.6.2"
   },
   "devDependencies": {},
   "scripts": {
