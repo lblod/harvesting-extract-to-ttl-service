@@ -9,7 +9,6 @@
   "author": "redpencil.io",
   "license": "MIT",
   "dependencies": {
-    "@lblod/marawa": "^0.8.0-beta.3",
     "@lblod/mu-auth-sudo": "^0.2.0",
     "body-parser": "1.19.0",
     "fs-extra": "8.1.0",
