@@ -1,6 +1,6 @@
 {
   "name": "harvesting-import-service",
-  "version": "0.5.0-beta.4",
+  "version": "0.6.0",
   "description": "Microservice that harvests knowledge about a harvesting-task from the linked annotated documents",
   "repository": {
     "type": "git",
