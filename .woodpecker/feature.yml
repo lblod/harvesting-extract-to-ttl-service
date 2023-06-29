@@ -3,7 +3,7 @@ steps:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: ${CI_REPO}
-      tags: ${CI_COMMIT_SOURCE_BRANCH/\//-}
+      tags: "feature-${CI_COMMIT_BRANCH##feature/}"
     secrets: [ docker_username, docker_password ]
 when:
   branch: feature/*
