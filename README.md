@@ -47,6 +47,7 @@ This service will filter out  <http://redpencil.data.gift/vocabularies/tasks/Tas
 ### Environment variables
 
  - TARGET_GRAPH: refers to the graph where the harvested triples will be imported into.
+ - GZIP_OUTPUT_FILES: whether to gzip output files.
  Defaults to <http://mu.semte.ch/graphs/public>.
 
 ## Validation and correction
