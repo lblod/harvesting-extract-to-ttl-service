@@ -5,6 +5,9 @@ import { run as runImportPipeline } from './lib/pipeline-import';
 import { Delta } from "./lib/delta";
 import {
   failBusyImportTasks,
+  loadExtractionTask,
+  updateTaskStatus,
+  deleteResultContainer
 } from "./lib/task";
 import { STATUS_SCHEDULED } from './constants';
 
@@ -20,6 +23,21 @@ app.use(bodyParser.json({
     return /^application\/json/.test(req.get('content-type'));
   }
 }));
+
+
+/*
+ * for debugging only, don't expose because it uses sudo queries
+ */
+app.post('/retry', async function (req, res, next) {
+  try {
+    const task = await loadExtractionTask(req.params.uri);
+    await deleteResultContainer(task);
+    await updateTaskStatus(task, STATUS_SCHEDULED);
+  }
+  catch(e) {
+    return next(e);
+  }
+});
 
 app.get('/', function (_, res) {
   res.send('Hello harvesting-import-service');
