@@ -3,7 +3,17 @@ import {app, errorHandler} from 'mu';
 import bodyParser from 'body-parser';
 import { run as runImportPipeline } from './lib/pipeline-import';
 import { Delta } from "./lib/delta";
+import {
+  failBusyImportTasks,
+} from "./lib/task";
 import { STATUS_SCHEDULED } from './constants';
+
+
+/*
+ * fail existing import tasks when (re)starting
+ * this should clean up any task in a busy state after an unexpected service restart
+ */
+failBusyImportTasks();
 
 app.use(bodyParser.json({
   type: function (req) {
