@@ -15,7 +15,7 @@
     "lodash.uniqwith": "^4.5.0",
     "n3": "^1.17.0",
     "rdf-serialize": "^2.2.2",
-    "@nbittich/rdfa-streaming-parser": "^2.0.1-custom-html-extractor ",
+    "@lblod/rdfa-streaming-parser": "^2.0.2-custom-html-extractor ",
     "stream-to-array": "^2.3.0",
     "stream-to-string": "^1.2.0",
     "streamify-array": "^1.0.1",
