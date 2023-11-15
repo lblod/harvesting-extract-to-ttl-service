@@ -11,7 +11,7 @@
   "dependencies": {
     "@lblod/graph-rdfa-processor": "^2.1.0",
     "@lblod/mu-auth-sudo": "^0.6.1",
-    "jsdom": "^9.11.0",
+    "jsdom": "^22.1.0",
     "lodash.flatten": "^4.4.0",
     "lodash.uniq": "^4.5.0",
     "lodash.uniqwith": "^4.5.0",
