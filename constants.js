@@ -1,14 +1,19 @@
-export const TASK_HARVESTING_IMPORTING = 'http://lblod.data.gift/id/jobs/concept/TaskOperation/importing';
+export const TASK_HARVESTING_IMPORTING =
+  "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing";
 
-export const STATUS_BUSY = 'http://redpencil.data.gift/id/concept/JobStatus/busy';
-export const STATUS_SCHEDULED = 'http://redpencil.data.gift/id/concept/JobStatus/scheduled';
-export const STATUS_SUCCESS = 'http://redpencil.data.gift/id/concept/JobStatus/success';
-export const STATUS_FAILED = 'http://redpencil.data.gift/id/concept/JobStatus/failed';
+export const STATUS_BUSY =
+  "http://redpencil.data.gift/id/concept/JobStatus/busy";
+export const STATUS_SCHEDULED =
+  "http://redpencil.data.gift/id/concept/JobStatus/scheduled";
+export const STATUS_SUCCESS =
+  "http://redpencil.data.gift/id/concept/JobStatus/success";
+export const STATUS_FAILED =
+  "http://redpencil.data.gift/id/concept/JobStatus/failed";
 
-export const JOB_TYPE = 'http://vocab.deri.ie/cogs#Job';
-export const TASK_TYPE = 'http://redpencil.data.gift/vocabularies/tasks/Task';
-export const ERROR_TYPE= 'http://open-services.net/ns/core#Error';
-export const ERROR_URI_PREFIX = 'http://redpencil.data.gift/id/jobs/error/';
+export const JOB_TYPE = "http://vocab.deri.ie/cogs#Job";
+export const TASK_TYPE = "http://redpencil.data.gift/vocabularies/tasks/Task";
+export const ERROR_TYPE = "http://open-services.net/ns/core#Error";
+export const ERROR_URI_PREFIX = "http://redpencil.data.gift/id/jobs/error/";
 
 export const PREFIXES = `
   PREFIX harvesting: <http://lblod.data.gift/vocabularies/harvesting/>
@@ -23,3 +28,8 @@ export const PREFIXES = `
   PREFIX cogs: <http://vocab.deri.ie/cogs#>
   PREFIX adms: <http://www.w3.org/ns/adms#>
 `;
+
+export const HIGH_LOAD_DATABASE_ENDPOINT =
+  process.env.HIGH_LOAD_DATABASE_ENDPOINT ||
+  process.env.VIRTUOSO_ENDPOINT ||
+  "http://virtuoso:8890/sparql";
