@@ -1,5 +1,3 @@
-import * as env from 'env-var';
-
 export const TASK_HARVESTING_IMPORTING =
   "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing";
 
@@ -30,6 +28,9 @@ export const PREFIXES = `
   PREFIX cogs: <http://vocab.deri.ie/cogs#>
   PREFIX adms: <http://www.w3.org/ns/adms#>
 `;
-
-export const HIGH_LOAD_DATABASE_ENDPOINT = env.get("HIGH_LOAD_DATABASE_ENDPOINT").default("http://virtuoso:8890/sparql");
-export const WRITE_DEBUG_TTLS = env.get("WRITE_DEBUG_TTLS").asBool();
+export const HIGH_LOAD_DATABASE_ENDPOINT =
+  process.env.HIGH_LOAD_DATABASE_ENDPOINT ||
+  process.env.VIRTUOSO_ENDPOINT ||
+  "http://virtuoso:8890/sparql";
+export const WRITE_DEBUG_TTLS =
+  process.env.WRITE_DEBUG_TTLS === "true" ? true : false;
