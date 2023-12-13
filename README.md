@@ -45,9 +45,10 @@ services:
 This service will filter out  <http://redpencil.data.gift/vocabularies/tasks/Task> with operation <http://lblod.data.gift/id/jobs/concept/TaskOperation/importing>.
 
 ### Environment variables
-
  - TARGET_GRAPH: refers to the graph where the harvested triples will be imported into.
  Defaults to <http://mu.semte.ch/graphs/public>.
+ - WRITE_DEBUG_TTLS: (default: `true`) whether to also write original, corrected and invalid triples to files
+ - HIGH_LOAD_DATABASE_ENDPOINT: (default: `http://virtuoso:8890/sparql`) endpoint to use for most file related queries (avoids delta overhead)
 
 ## Validation and correction
 The service will lis
