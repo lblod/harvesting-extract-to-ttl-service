@@ -16,7 +16,7 @@
     "lodash.uniq": "^4.5.0",
     "lodash.uniqwith": "^4.5.0",
     "n3": "^1.17.0",
-    "rdf-serialize": "^2.2.2",
+    "rdf-serialize": "^3.0.0",
     "stream-to-array": "^2.3.0",
     "stream-to-string": "^1.2.0",
     "streamify-array": "^1.0.1",
