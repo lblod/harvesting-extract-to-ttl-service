@@ -1,13 +1,12 @@
-# harvesting-import-service
-
-Microservice that harvests knowledge about a harvesting-task from the linked annotated documents
-and writes the resulting triples to the database.
+# harvesting-extract-to-ttl-service
+Microservice that extracts rdfa knowledge from html documents and stores the information in turtle files for later processing.
+This service is meant to be used in combination with a [job-controller](https://github.com/lblod/job-controller-service). It requires in input container with html files to process.
 
 ## Installation
 
 To add the service to your stack, add the following snippet to docker-compose.yml:
 
-```
+```yml
 services:
   harvesting-import:
     image: lblod/harvesting-import-service:x.x.x
@@ -15,7 +14,24 @@ services:
       - ./data/files:/share
 ```
 
-## Configuration
+### Job controller config
+```js
+{
+  "http://lblod.data.gift/id/jobs/concept/JobOperation/lblodHarvesting": {
+    "tasksConfiguration": [
+      {
+        "currentOperation": null,
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing",
+        "nextIndex": "0"
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/collecting",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing",
+        "nextIndex": "1"
+      },
+      // ...
+  }
+```
 
 ### Delta
 
@@ -42,18 +58,14 @@ services:
     }
   },
 ```
+
 This service will filter out  <http://redpencil.data.gift/vocabularies/tasks/Task> with operation <http://lblod.data.gift/id/jobs/concept/TaskOperation/importing>.
 
 ### Environment variables
- - TARGET_GRAPH: refers to the graph where the harvested triples will be imported into.
- Defaults to <http://mu.semte.ch/graphs/public>.
  - WRITE_DEBUG_TTLS: (default: `true`) whether to also write original, corrected and invalid triples to files
- - HIGH_LOAD_DATABASE_ENDPOINT: (default: `http://virtuoso:8890/sparql`) endpoint to use for most file related queries (avoids delta overhead)
 
 ## Validation and correction
-The service will lis
-The service will validate the triples to import and will try its best to correct the ones that it founds invalid.
-Valid, invalid and corrected triples are written to a file.
+The service will validate the triples to import and will try its best to correct the ones that it founds invalid. Valid, invalid and corrected triples are written to a file.
 
 ## REST API
 
