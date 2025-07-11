@@ -8,8 +8,8 @@ To add the service to your stack, add the following snippet to docker-compose.ym
 
 ```yml
 services:
-  harvesting-import:
-    image: lblod/harvesting-import-service:x.x.x
+  harvesting-extract:
+    image: lblod/harvesting-extract-to-ttl:x.x.x
     volumes:
       - ./data/files:/share
 ```
@@ -21,12 +21,12 @@ services:
     "tasksConfiguration": [
       {
         "currentOperation": null,
-        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/extracting",
         "nextIndex": "0"
       },
       {
         "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/collecting",
-        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/extracting",
         "nextIndex": "1"
       },
       // ...
@@ -49,7 +49,7 @@ services:
     },
     callback: {
       method: 'POST',
-      url: 'http://harvesting-import/delta'
+      url: 'http://harvesting-extract/delta'
     },
     options: {
       resourceFormat: 'v0.0.1',
@@ -59,7 +59,8 @@ services:
   },
 ```
 
-This service will filter out  <http://redpencil.data.gift/vocabularies/tasks/Task> with operation <http://lblod.data.gift/id/jobs/concept/TaskOperation/importing>.
+This service will filter out  <http://redpencil.data.gift/vocabularies/tasks/Task> with operation <http://lblod.data.gift/id/jobs/concept/TaskOperation/extracting>.
+NOTE: For historic reasons, this service will also respond to jobs with operation <http://lblod.data.gift/id/jobs/concept/TaskOperation/importing>
 
 ### Environment variables
  - WRITE_DEBUG_TTLS: (default: `true`) whether to also write original, corrected and invalid triples to files
