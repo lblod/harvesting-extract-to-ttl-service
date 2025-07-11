@@ -1,4 +1,6 @@
-export const TASK_HARVESTING_IMPORTING =
+export const TASK_HARVESTING_EXTRACTING =
+  "http://lblod.data.gift/id/jobs/concept/TaskOperation/extracting";
+export const LEGACY_TASK_HARVESTING_IMPORTING =
   "http://lblod.data.gift/id/jobs/concept/TaskOperation/importing";
 
 export const STATUS_BUSY =
