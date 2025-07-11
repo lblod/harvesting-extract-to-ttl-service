@@ -1,5 +1,5 @@
 {
-  "name": "harvesting-import-service",
+  "name": "harvesting-extract-to-ttl-service",
   "version": "0.13.8",
   "description": "Microservice that harvests knowledge about a harvesting-task from the linked annotated documents",
   "repository": {
