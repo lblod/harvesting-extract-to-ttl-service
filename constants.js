@@ -36,3 +36,5 @@ export const HIGH_LOAD_DATABASE_ENDPOINT =
   "http://virtuoso:8890/sparql";
 export const WRITE_DEBUG_TTLS =
   process.env.WRITE_DEBUG_TTLS === "true" ? true : false;
+export const WRITE_DECISION_FILES =
+  process.env.WRITE_DECISION_FILES !== "false";

@@ -64,6 +64,7 @@ NOTE: For historic reasons, this service will also respond to jobs with operatio
 
 ### Environment variables
  - WRITE_DEBUG_TTLS: (default: `true`) whether to also write original, corrected and invalid triples to files
+ - WRITE_DECISION_FILES: (default: `true`) whether to write decision content HTML files to the filesystem. When disabled, decision content is skipped entirely to avoid large database entries.
 
 ## Validation and correction
 The service will validate the triples to import and will try its best to correct the ones that it founds invalid. Valid, invalid and corrected triples are written to a file.
