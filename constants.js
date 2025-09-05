@@ -38,7 +38,7 @@ export const HIGH_LOAD_DATABASE_ENDPOINT = env
     env
       .get("VIRTUOSO_ENDPOINT")
       .default("http://virtuoso:8890/sparql")
-      .asString()
+      .asString(),
   )
   .asString();
 
