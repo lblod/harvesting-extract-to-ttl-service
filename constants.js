@@ -1,3 +1,5 @@
+import env from "env-var";
+
 export const TASK_HARVESTING_EXTRACTING =
   "http://lblod.data.gift/id/jobs/concept/TaskOperation/extracting";
 export const LEGACY_TASK_HARVESTING_IMPORTING =
@@ -30,11 +32,22 @@ export const PREFIXES = `
   PREFIX cogs: <http://vocab.deri.ie/cogs#>
   PREFIX adms: <http://www.w3.org/ns/adms#>
 `;
-export const HIGH_LOAD_DATABASE_ENDPOINT =
-  process.env.HIGH_LOAD_DATABASE_ENDPOINT ||
-  process.env.VIRTUOSO_ENDPOINT ||
-  "http://virtuoso:8890/sparql";
-export const WRITE_DEBUG_TTLS =
-  process.env.WRITE_DEBUG_TTLS === "true" ? true : false;
-export const WRITE_DECISION_FILES =
-  process.env.WRITE_DECISION_FILES !== "false";
+export const HIGH_LOAD_DATABASE_ENDPOINT = env
+  .get("HIGH_LOAD_DATABASE_ENDPOINT")
+  .default(
+    env
+      .get("VIRTUOSO_ENDPOINT")
+      .default("http://virtuoso:8890/sparql")
+      .asString()
+  )
+  .asString();
+
+export const WRITE_DEBUG_TTLS = env
+  .get("WRITE_DEBUG_TTLS")
+  .default("true")
+  .asBool();
+
+export const WRITE_DECISION_FILES = env
+  .get("WRITE_DECISION_FILES")
+  .default("true")
+  .asBool();
