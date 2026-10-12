@@ -10,9 +10,8 @@
   "author": "redpencil.io",
   "license": "MIT",
   "dependencies": {
-    "@lblod/graph-rdfa-processor": "^2.1.10",
     "@lblod/mu-auth-sudo": "^0.6.1",
-    "jsdom": "^22.1.0",
+    "@nbittich/rdfa-wasm": "^0.4.0",
     "lodash.flatten": "^4.4.0",
     "lodash.uniq": "^4.5.0",
     "lodash.uniqwith": "^4.5.0",
